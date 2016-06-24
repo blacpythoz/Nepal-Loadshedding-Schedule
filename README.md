@@ -1,9 +1,9 @@
 # Nepal LoadShedding Schedule[WIP]
  
- This is a dirty script written in free time. This script just extract the schedule from the other sites and prints the result in a desirable format. You can pipe the info to conky, dzen2, yabar or dunst. 
+ This is a dirty script written in free time. This script just extract the schedule from the sites and prints the result in a desirable format. You can pipe the info to conky, dzen2, yabar or dunst. 
 Choose your own color for any table elements.
 
- There's a lot of cleanup needed in this script.
+ [Note]There's a lot of cleanup needed in this script.
 
 
  ![loadshedding](https://cloud.githubusercontent.com/assets/12681896/16272923/474a1ab0-38bf-11e6-9729-c8f46f0d194d.png)
@@ -16,18 +16,18 @@ When used with the lemonbar and as conky:
 
 ## How to install: 
 
-1. Clone the repo or download the zip
+1. Clone the repo or download the zip<br>
     `git clone https://github.com/blacpythoz/Nepal-Loadshedding-Schedule.git`
     OR
 		`wget https://codeload.github.com/blacpythoz/Nepal-Loadshedding-Schedule/zip/master`
 
-2. Change the directory
+2. Change the directory<br>
 		`cd Nepal-Loadshedding-Schedule/`
  
-3. Make the script executable
+3. Make the script executable<br>
     `chmod +x load`
 
-4. Run the program
+4. Run the program<br>
     `./load`
 
 
@@ -59,3 +59,4 @@ cyan  = 6            white  = 7
 Examples:
 
 `./load -t 4 -d 1`
+![sample remaining time](https://cloud.githubusercontent.com/assets/12681896/16327373/eaee5a30-39ed-11e6-9e12-7c1de9f81a3b.png)
