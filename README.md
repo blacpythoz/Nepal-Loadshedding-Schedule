@@ -2,6 +2,7 @@
  
  This is a dirty script written in free time. This script just extract the schedule from the sites and prints the result in a desirable format. You can pipe the info to conky, dzen2, yabar or dunst. 
 Choose your own color for any table elements.
+Fully tested on Arch Linux
 
  [Note]There's a lot of cleanup needed in this script.
 
@@ -39,6 +40,7 @@ When used with the lemonbar and as conky:
     -a [default]        Show all schedule 
     -g [group [1-7]]    Select the groups
     -t [group no]       Show the today schedule
+    -w [group no]       Show the weekly schedule
     -C [true/fase]      Toogle the color options
     -h [topics]         Print this text and exit
     -G [Color codes]    Sets the color of the side bar text 
@@ -47,7 +49,7 @@ When used with the lemonbar and as conky:
     -B [Color codes]    Sets the background color of tables
     -F [Color codes]    Sets the foreground color of tables
     -S [Color codes]    Sets the Selected foreground color of tables
-    -U [Color codes]    Sets the underline in the tables data
+    -U [true/false]    Sets the underline in the tables data
 
 [COLOR CODES]
       natural = natural

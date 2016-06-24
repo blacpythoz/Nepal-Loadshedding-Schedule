@@ -41,6 +41,7 @@ ul=`tput smul`
 reset=`tput sgr0`
 red=`tput setaf 1`
 green=`tput setaf 2`
+colorStatus=""
 
 ##download schedule insted of porn ;)
 function download {
@@ -140,10 +141,8 @@ function fullSchedule {
         fi
         done
         echo
-
-        printf "$gap1" " "
-        for (( i=1;i<=rows;i++ )) do
-            #for the main data row wise
+            printf "$gap1" " "
+            for (( i=1;i<=rows;i++ )) do #for the main data row wise
             day=(`echo "${arr[$i]}" | cut -d":" -f1 | grep -o "^..." `)
             ##check if today is the day, then prints in color formate
          if [[ ("$day" == "$today") || ( "$j" == "$1") ]]; then
@@ -168,6 +167,26 @@ function today {
     printf "%s\n" "Schedule of group $group are: " "${line[$group,$dayInNumber]}" "${line2[$group,$dayInNumber]}"
     echo ""
 }
+##for the week
+function week {
+    store
+    status
+    echo "<-------------------------------------->"
+    echo "<---- Weekly Schedule For group $group ----->"
+    for (( i=1; i<=rows; i++ )) do
+            echo "----------------------------------------"
+            dey=`echo "${arr[$i]}" | cut -d":" -f1 | grep -o "^..."`
+            printf "%s\t\t" "$dey"
+         if [[ ("$dey" == "$today") ]]; then
+            printf "%s,%s" "${colorStatus}${line[$group,$i]}" "${line2[$group,$i]}${reset}"
+        else
+            printf "%s,%s" "${line[$group,$i]}" "${line2[$group,$i]}"
+        fi
+            echo ""
+    echo "----------------------------------------"
+    done
+}
+
 function status {
     getTime="${line[$group,$dayInNumber]}-${line2[$group,$dayInNumber]}"
     IFS=':-' read h1 m1 h2 m2 h3 m3 h4 m4 <<< "$getTime"
@@ -178,18 +197,22 @@ function status {
         if [[ (( "$H" -lt "$h2" )) ]]; then
             ##echo "it lies in group $h1 to $h2"
             storeText="Lights comes after: `calculate $H $M $S $h2 $m2 00`"
+            colorStatus="$red"
         else
           ##  echo "It lies in group $h3 to $h4"
             storeText="Light comes after: `calculate $H $M $S $h4 $m4 00`"
+            colorStatus="$red"
         fi
     else
         result="${green}---->THERE IS LIGHT<----\n${reset}"
         if [[ (( "$H" -lt "$h1" )) ]]; then
             #echo "It lies below $h1"
             storeText="Light goes after: `calculate $h1 $m1 00 $H $M $S`"
+            colorStatus="$green"
         elif [[ (("$H" -ge "$h2") && ("$H" -lt "$h3")) ]]; then
             #echo "It lies between $h2 and $h3"
             storeText="Light goes after: `calculate $H $M $S $h3 $m3 00`"
+            colorStatus="$green"
         else
             result+="No loadshedding for the day"
         fi
@@ -242,7 +265,7 @@ exit 1
 
 #for the views
 show=1
-while getopts ":aug:t:T:G:d:D:B:F:S:U:C:" o; do
+while getopts ":aug:t:w:T:G:d:D:B:F:S:U:C:" o; do
     case "${o}" in
         a)
 						show=1
@@ -257,6 +280,10 @@ while getopts ":aug:t:T:G:d:D:B:F:S:U:C:" o; do
             group=${OPTARG}
 						show=2
 						;;
+        w)
+            group=${OPTARG}
+            show=3
+            ;;
         T)
            group=${OPTARG}
            store
@@ -318,8 +345,9 @@ if [[ "$show" == 1 ]]; then
 elif [[ "$show" == 2 ]]; then
     today
 elif [[ "$show" == 3 ]]; then
-    echo "Read the manual"
-    exit 1;
+    week
 else
+    echo "Read the manual"
     echo "Zzzzzzzzz...."
+    exit 1;
 fi
