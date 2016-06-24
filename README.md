@@ -46,7 +46,6 @@ Weekly view with current status indicated by color <br>
     -t [group no]       Show the today schedule
     -w [group no]       Show the weekly schedule
     -C [true/fase]      Toogle the color options
-    -h [topics]         Print this text and exit
     -G [Color codes]    Sets the color of the side bar text 
     -d [Color codes]    Sets the foreground color of day text
     -D [Color codes]    Sets the background color of days
@@ -54,6 +53,7 @@ Weekly view with current status indicated by color <br>
     -F [Color codes]    Sets the foreground color of tables
     -S [Color codes]    Sets the Selected foreground color of tables
     -U [true/false]    Sets the underline in the tables data
+    -h [topics]         Print this text and exit
 
 [COLOR CODES]
       natural = natural
