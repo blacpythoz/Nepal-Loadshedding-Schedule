@@ -27,8 +27,8 @@ When used with the lemonbar and as conky:
 3. Make the script executable<br>
     `chmod +x load`
 
-4. Run the program<br>
-    `./load`
+4. Run the program first by update<br>
+    `./load -u` 
 
 
 ## Manual
