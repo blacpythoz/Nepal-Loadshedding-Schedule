@@ -58,5 +58,5 @@ cyan  = 6            white  = 7
 
 Examples:
 
-`./load -t 4 -d 1`
+`./load -t 4 -d 1` <br>
 ![sample remaining time](https://cloud.githubusercontent.com/assets/12681896/16327373/eaee5a30-39ed-11e6-9e12-7c1de9f81a3b.png)
