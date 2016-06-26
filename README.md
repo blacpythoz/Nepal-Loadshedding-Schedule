@@ -18,9 +18,6 @@ Weekly view with current status indicated by color <br>
 
 ![weekly view](https://cloud.githubusercontent.com/assets/12681896/16328929/7ca43dea-39fe-11e6-98d7-c34d01d53bec.png)
 
-Daily view with the ascii image <br>
-![Daily views](https://cloud.githubusercontent.com/assets/12681896/16361115/a6053526-3ba3-11e6-8404-64b7ebb2a7e3.png)
-
 
 
 ## How to install: 
@@ -68,5 +65,5 @@ cyan  = 6            white  = 7
 
 Examples:
 
-`./load -t 4 -d 1` <br>
-![sample remaining time](https://cloud.githubusercontent.com/assets/12681896/16327373/eaee5a30-39ed-11e6-9e12-7c1de9f81a3b.png)
+`./load -t 4 ` <br>
+![Daily views](https://cloud.githubusercontent.com/assets/12681896/16361115/a6053526-3ba3-11e6-8404-64b7ebb2a7e3.png)
