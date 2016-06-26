@@ -1,5 +1,12 @@
 #!/bin/zsh
 #
+#------------------[ TO DO ]--------------------
+#ADD BETTER SOURCE
+#SEARCH FOR OTHER STORAGE/ Dont use aso array
+#fucked up/it just slows dowm 
+#add ascii images[complete]
+#------------------------------------------
+#
 #Nepal LoadShedding Schedule
 #https://github.com/blacpythoz/nepal-loadshedding-schedule
 #
@@ -11,10 +18,9 @@
 # Created by Subash Aryal
 # https://github.com/blacpythoz
 #
-# Version: 0.3 (beta)
+# Version: 0.4 (beta)
 # Date: 24/June/2016
-#
-############################################
+# ############################################
 #for future ref:
 #if the sites get updated, then what??
 #list must be in format
@@ -51,6 +57,7 @@ ul=`tput smul`
 reset=`tput sgr0`
 red=`tput setaf 1`
 green=`tput setaf 2`
+##used in weekly and bulb ascii
 colorStatus=""
 
 ##download schedule insted of porn ;)
@@ -117,7 +124,8 @@ function store {
             ##store the variable in the variable
              line[$i,$j]="${tim[1]}"
              line2[$i,$j]="${tim[2]}"
-             echo "${tim[1]}"
+             #testing
+             #echo "${tim[1]}"
     #       echo "$table[$i,$j]"
             ##testing count
             ##echo "Count is $count"
@@ -131,7 +139,7 @@ function fullSchedule {
     #calll the store before this function
     store
     #it just maintain the gaps between the rows of emements
-    gap1="%2s"
+    gap1=" %2s"
     gap2=" %9s"
     gap3=" %8s"
     printf "$gap1" ''
@@ -183,30 +191,50 @@ function today {
     status
     ##prints the status
     echo ""
-    echo "$result"
-    echo "$storeText"
+    #echo "$result"
+    #echo "$storeText"
+ cat << EOF
+
+
+                                   ${colorStatus} _------_${reset}
+$result                          ${colorStatus}-~        ~-
+                                 -     _      -
+                                -      |>      -${reset}
+$storeText           ${colorStatus}-      |<      -
+                                 -     |>     -
+                                  -    ||    -
+                                   -   ||   -${reset}
+Schedule for Group $group                ${colorStatus}-__||__-${reset}
+                                    |______|
+    ${line[$group,$dayInNumber]}                     <______>
+    ${line2[$group,$dayInNumber]}                     <______>
+                                       \/
+EOF
     echo ""
-    printf "%s\n" "Schedule of group $group are: " "${line[$group,$dayInNumber]}" "${line2[$group,$dayInNumber]}"
+#    printf "%s\n" "Schedule of group $group are: " "${line[$group,$dayInNumber]}" "${line2[$group,$dayInNumber]}"
     echo ""
 }
 ##for the week
 function week {
     store
     status
+    echo ""
     echo "<-------------------------------------->"
     echo "<---- Weekly Schedule For group $group ----->"
     for (( i=1; i<=rows; i++ )) do
             echo "----------------------------------------"
             dey=`echo "${arr[$i]}" | cut -d":" -f1 | grep -o "^..."`
             printf "%s\t\t" "$dey"
-         if [[ ("$dey" == "$today") ]]; then
+         #if [[ ("$dey" == "$today") ]]; then
+         if [[ ("$i" == "$dayInNumber") ]]; then
             printf "%s,%s" "${colorStatus}${line[$group,$i]}" "${line2[$group,$i]}${reset}"
-        else
+       else
             printf "%s,%s" "${line[$group,$i]}" "${line2[$group,$i]}"
         fi
             echo ""
     echo "----------------------------------------"
     done
+    echo ""
 }
 
 function status {
@@ -215,28 +243,28 @@ function status {
     ##check the condition for light on and off
     if [[ (( "$H" -ge "$h1") && ("$H" -lt "$h2")) || (("$H" -ge "$h3") && ("$H" -lt "$h4")) ]]; then
         ##test which group it falls on
-        result="${red}---->NO LIGHTS<----${reset}"
+        result="${red}NO LIGHTS${reset}"
         if [[ (( "$H" -lt "$h2" )) ]]; then
             ##echo "it lies in group $h1 to $h2"
-            storeText="Lights comes after: `calculate $H $M $S $h2 $m2 00`"
+            storeText="Comes After: `calculate $H $M $S $h2 $m2 00`"
             colorStatus="$red"
         else
           ##  echo "It lies in group $h3 to $h4"
-            storeText="Light comes after: `calculate $H $M $S $h4 $m4 00`"
+            storeText="Comes after: `calculate $H $M $S $h4 $m4 00`"
             colorStatus="$red"
         fi
     else
-        result="${green}---->THERE IS LIGHT<----\n${reset}"
+        result="${green}LIGHTS ON${reset}"
         if [[ (( "$H" -lt "$h1" )) ]]; then
             #echo "It lies below $h1"
-            storeText="Light goes after: `calculate $h1 $m1 00 $H $M $S`"
+            storeText="Goes  after: `calculate $h1 $m1 00 $H $M $S`"
             colorStatus="$green"
         elif [[ (("$H" -ge "$h2") && ("$H" -lt "$h3")) ]]; then
             #echo "It lies between $h2 and $h3"
-            storeText="Light goes after: `calculate $H $M $S $h3 $m3 00`"
+            storeText="Goes  after: `calculate $H $M $S $h3 $m3 00`"
             colorStatus="$green"
         else
-            result+="No loadshedding for the day"
+            result+="NoCut4Day"
         fi
     fi
 }
@@ -265,7 +293,8 @@ function usage { cat << EOF
     -t [group no]       Show the today schedule
     -w [group no]       Show the weekly schedule
     -g [group [1-7]]    Select the groups
-    -C [true/fase]      Toogle the color options
+    -C [true/false]     Toogle the color options
+    -A [true/false]     Sets the ascii image or not
     -G [Color codes]    Sets the color of the side bar text 
     -d [Color codes]    Sets the foreground color of day text
     -D [Color codes]    Sets the background color of days

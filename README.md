@@ -18,13 +18,17 @@ Weekly view with current status indicated by color <br>
 
 ![weekly view](https://cloud.githubusercontent.com/assets/12681896/16328929/7ca43dea-39fe-11e6-98d7-c34d01d53bec.png)
 
+Daily view with the ascii image <br>
+![Daily views](https://cloud.githubusercontent.com/assets/12681896/16361115/a6053526-3ba3-11e6-8404-64b7ebb2a7e3.png)
+
+
 
 ## How to install: 
 
 1. Clone the repo or download the zip<br>
-    `git clone https://github.com/blacpythoz/Nepal-Loadshedding-Schedule.git`
-    OR
-		`wget https://codeload.github.com/blacpythoz/Nepal-Loadshedding-Schedule/zip/master`
+    `git clone https://github.com/blacpythoz/Nepal-Loadshedding-Schedule.git` <br>
+    OR <br>
+		`wget https://codeload.github.com/blacpythoz/Nepal-Loadshedding-Schedule/zip/master` <br>
 
 2. Change the directory<br>
 		`cd Nepal-Loadshedding-Schedule/`
@@ -45,7 +49,7 @@ Weekly view with current status indicated by color <br>
     -g [group [1-7]]    Select the groups
     -t [group no]       Show the today schedule
     -w [group no]       Show the weekly schedule
-    -C [true/fase]      Toogle the color options
+    -C [true/false]      Toogle the color options
     -G [Color codes]    Sets the color of the side bar text 
     -d [Color codes]    Sets the foreground color of day text
     -D [Color codes]    Sets the background color of days
